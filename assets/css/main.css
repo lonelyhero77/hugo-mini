@@ -1,0 +1,159 @@
+@import "components/header.css";
+@import "components/footer.css";
+
+body {
+  color: #222;
+  font-family: sans-serif;
+  line-height: 1.5;
+  margin: 1rem auto;
+  max-width: 1200px;
+}
+
+.site-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas:
+    "content"
+    "footer";
+  grid-template-rows: 1fr auto;
+  min-height: calc(100vh - 2rem);
+}
+
+.site-layout.has-profile {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-areas:
+    "profile content"
+    "profile footer";
+}
+
+.site-layout:not(.has-profile) {
+  margin-inline: auto;
+  max-width: 900px;
+}
+
+.profile-column {
+  align-items: flex-start;
+  border-right: 1px solid #222;
+  display: flex;
+  grid-area: profile;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.profile-photo {
+  display: block;
+  height: auto;
+  max-width: 100%;
+  width: 100%;
+}
+
+.profile-card {
+  width: min(80%, 480px);
+}
+
+.profile-options,
+.profile-quotes {
+  display: none;
+}
+
+.js .profile-options,
+.js .profile-quotes {
+  display: block;
+}
+
+.profile-options .profile-figure {
+  display: none;
+  margin: 0;
+}
+
+.profile-options .profile-figure.is-selected {
+  display: block;
+}
+
+.profile-quotes {
+  margin-top: 2rem;
+}
+
+.js .profile-quotes blockquote {
+  display: none;
+  margin: 0;
+}
+
+.js .profile-quotes blockquote.is-selected {
+  display: block;
+}
+
+.profile-quotes blockquote p {
+  margin: 0;
+}
+
+.profile-quotes cite {
+  display: block;
+  font-size: 0.9em;
+  font-style: normal;
+  text-align: right;
+}
+
+.site-content {
+  grid-area: content;
+  min-width: 0;
+  padding: 1rem;
+}
+
+.site-layout.has-profile .site-content main > section h2,
+.post-list-item h2 {
+  margin-bottom: 0.15rem;
+}
+
+.site-layout.has-profile .site-content main > section time,
+.post-list-item time {
+  display: block;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+footer {
+  grid-area: footer;
+}
+
+a {
+  color: #00e;
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .site-layout {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "content"
+      "footer";
+    grid-template-rows: auto;
+    min-height: auto;
+  }
+
+  .site-layout.has-profile {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "content"
+      "profile"
+      "footer";
+  }
+
+  .site-layout.has-profile .site-content {
+    position: relative;
+  }
+
+  .site-layout.has-profile .site-content::after {
+    border-bottom: 1px solid #222;
+    bottom: 0;
+    content: "";
+    left: 1rem;
+    position: absolute;
+    right: 1rem;
+  }
+
+  .site-layout.has-profile .profile-column {
+    border-right: 0;
+    min-height: 0;
+  }
+}

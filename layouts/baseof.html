@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="{{ site.Language.Locale }}" dir="{{ or site.Language.Direction `ltr` }}">
+<head>
+  {{ partial "head.html" . }}
+</head>
+<body>
+  <div class="site-layout{{ if .IsHome }} has-profile{{ end }}">
+    <div class="site-content">
+      <header>
+        {{ partial "header.html" . }}
+      </header>
+      <main>
+        {{ block "main" . }}{{ end }}
+      </main>
+    </div>
+    {{ if .IsHome }}
+      <aside class="profile-column">
+        <div class="profile-card">
+          {{ with hugo.Data.profile.profiles }}
+            <div class="profile-options">
+              {{ range . }}
+                <figure class="profile-figure">
+                  <img class="profile-photo" data-src="{{ .photo | relURL }}" alt="{{ .photoAlt }}">
+                </figure>
+              {{ end }}
+            </div>
+          {{ end }}
+          {{ with hugo.Data.quotes.quotes }}
+            <div class="profile-quotes">
+              {{ range . }}
+                <blockquote>
+                  {{ .text | markdownify }}
+                  <cite>{{ .author | markdownify }}</cite>
+                </blockquote>
+              {{ end }}
+            </div>
+          {{ end }}
+        </div>
+      </aside>
+    {{ end }}
+    <footer>
+      {{ partial "footer.html" . }}
+    </footer>
+  </div>
+</body>
+</html>
